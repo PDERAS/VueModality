@@ -1,5 +1,10 @@
 import ModalWrapper from './ModalWrapper';
 
+/**
+ * Injects this.$modals into every component
+ *
+ * @param {Vue} Vue
+ */
 export function applyMixin(Vue) {
     // Globalize the $modals option
     Vue.mixin({ beforeCreate: VueModalityInit });

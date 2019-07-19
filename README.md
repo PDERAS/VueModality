@@ -10,6 +10,11 @@ import Modality from '@pderas/modality'
 Vue.use(Modality)
 ```
 
+Optionally, If you choose to apply the default (minimal) styling, The compiled css file can be added to the lines above.
+```js
+import '@pderas/modality/dist/modality.css';
+```
+
 Next we register a new "Modals" object which declares every available modal in the system. Below are 4 different of registering the components, any of which work fine, however if you have many modals to be included, the last option may help reduce your overall bundle size by grouping all of the modals javascript into a separate .js file that will get loaded dynamically when the first modal opens.
 
 ```js
@@ -28,7 +33,7 @@ const modals = new Modality.Modals({
     MyNeatoModal: _ => import('./modals/ExampleModal')
 
     // code split & chunked imports
-    ChunkModal: _ => import(/* webpackChunkName: modality */ './modals/ExampleModal'),
+    ChunkModal: _ => import(/* webpackChunkName: modality */ './modals/ExampleModal2'),
   }
 });
 ```
