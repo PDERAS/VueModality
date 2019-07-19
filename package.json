@@ -1,0 +1,19 @@
+{
+  "name": "@pderas/modality",
+  "version": "1.0.0",
+  "description": "An easy to use, yet flexible modals library for Vue.js",
+  "main": "dist/modality.umd.min.js",
+  "module": "dist/modality.umd.min.js",
+  "scripts": {
+    "bundle": "vue-cli-service build --target lib --name modality ./src/index.js"
+  },
+  "author": "Reed Jones <reed.jones@pderas.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": "^2.5.17"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^3.9.3",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
