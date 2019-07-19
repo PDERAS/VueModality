@@ -10,17 +10,19 @@
   "author": "Reed Jones <reed.jones@pderas.com>",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "git@github.com:PDERAS/VueModality.git"
+    "type": "git",
+    "url": "git@github.com:PDERAS/VueModality.git"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "peerDependencies": {
     "vue": "^2.5.17"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.9.3",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
   },
   "files": [
