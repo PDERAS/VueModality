@@ -96,6 +96,7 @@ A default fade transition is applied, however the transition name can be overrid
 ```
 
 available options:
+
 | Key       | Type    | Description  |
 | --------- | ------- | ----- |
 | modal     | String  | modal identifier (if the first argument passed to `.show` is a string, this property is ignored/overridden) |
