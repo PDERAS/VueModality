@@ -3,6 +3,8 @@ import { assert } from './utils';
 
 let Vue; // bind on install
 
+let deferredPromises = {};
+
 class Modals {
     constructor(options = {}) {
         // Auto install if it is not done yet and `window` has `Vue`.
@@ -153,7 +155,17 @@ class Modals {
             ? { ..._options, modal: _name }
             : _name
 
+        const p = new Promise((resolve, reject) => {
+            // defer resolution until Modal closes
+            deferredPromises = {
+                ...deferredPromises,
+                [opts.modal]: { resolve, reject }
+            }
+        });
+
         this._watcherVM.add(opts);
+
+        return p;
     }
 
     /**
@@ -163,6 +175,15 @@ class Modals {
      */
     hide(_name) {
         this._watcherVM.remove(_name);
+
+        // grab & remove the modals promise
+        const { [_name]: modalPromise, ...rest } = deferredPromises;
+
+        // reset deferred without modal
+        deferredPromises = rest;
+
+        // resolve promise
+        modalPromise.resolve()
     }
 
     /**

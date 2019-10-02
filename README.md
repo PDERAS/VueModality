@@ -55,7 +55,7 @@ new Vue({
     <!-- <your-app /> -->
 
     <!-- Controls All The Modals -->
-    <VueModality />
+    <vue-modality />
     <!-- or <vue-modality /> -->
 </div>
 </template>
@@ -85,14 +85,18 @@ A modal can also close itself by simply emitting a 'close-modal' event.
 this.$emit('close-modal')
 ```
 
-
+If you wish to run an action on modal close, the `show` function returns a Promise which is resolved when the Modal closes.
+```js
+this.$modals.show('MyNeatoModal')
+    .then(_ => console.log("Modal No More!"))
+```
 ---
 
 ## Options.
 A default fade transition is applied, however the transition name can be overriden using the `transition-name` property on the component. For more information on vue transitions, visit: [vuejs.org/v2/guide/transitions](https://vuejs.org/v2/guide/transitions.html)
 
 ```html
-<VueModality transition-name="fade" />
+<vue-modality transition-name="fade" />
 ```
 
 available options:
