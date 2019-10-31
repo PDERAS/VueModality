@@ -151,6 +151,10 @@ class Modals {
      * @param {Object?} _options
      */
     show(_name, _options) {
+        // Disabled background scrolling when modal is open
+        document.body.style.top = `-${window.scrollY}px`;
+        document.body.style.position = 'fixed';
+
         const opts = typeof _name === 'string'
             ? { ..._options, modal: _name }
             : _name
@@ -181,6 +185,14 @@ class Modals {
 
         // reset deferred without modal
         deferredPromises = rest;
+
+        // Enable background scrolling if last model to close
+        if (!rest.length) {
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
 
         // resolve promise
         modalPromise.resolve()
