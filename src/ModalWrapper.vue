@@ -30,6 +30,7 @@ export default {
     functional: true,
     render(h, { $style, parent, props }) {
         const allModals = Object.entries(parent.$modals._available || {})
+            .reverse()
             .map(mapComponent(h, { $style, parent }));
 
         const transitionName = props.transitionName || 'default-modal-transition';
