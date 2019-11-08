@@ -151,13 +151,18 @@ class Modals {
      * @param {Object?} _options
      */
     show(_name, _options) {
-        // Disabled background scrolling when modal is open
-        document.body.style.top = `-${window.scrollY}px`;
-        document.body.style.position = 'fixed';
-
         const opts = typeof _name === 'string'
             ? { ..._options, modal: _name }
             : _name
+
+        if (!this.available.includes(opts.modal)) {
+            console.error(`[Modality]: Failed to show. ${opts.modal} is not a registered modal.`);
+            return console.error('Available:', Object.keys(this._available))
+        }
+
+        // Disabled background scrolling when modal is open
+        document.body.style.top = `-${window.scrollY}px`;
+        document.body.style.position = 'fixed';
 
         const p = new Promise((resolve, reject) => {
             // defer resolution until Modal closes
@@ -178,6 +183,11 @@ class Modals {
      * @param {String} _name
      */
     hide(_name) {
+        if (!Object.keys(this._available).includes(_name)) {
+            console.error(`[Modality]: Failed to hide. ${_name} is not a registered modal.`);
+            return console.error('Available:', Object.keys(this._available))
+        }
+
         this._watcherVM.remove(_name);
 
         // grab & remove the modals promise
