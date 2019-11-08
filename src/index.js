@@ -155,7 +155,7 @@ class Modals {
             ? { ..._options, modal: _name }
             : _name
 
-        if (!Object.keys(this._available).includes(opts.modal)) {
+        if (!this.available.includes(opts.modal)) {
             console.error(`[Modality]: Failed to show. ${opts.modal} is not a registered modal.`);
             return console.error('Available:', Object.keys(this._available))
         }
