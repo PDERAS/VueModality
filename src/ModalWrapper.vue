@@ -33,10 +33,9 @@ export default {
             .map(mapComponent(h, { $style, parent }))
             .filter(a => a);
 
-
         const getIndex = ({ key }) => parent.$modals.active.indexOf(key)
 
-        allModals.sort((a,b) => getIndex(a.data) - getIndex(b.data)).map(a => a.data.key)
+        allModals.sort((a,b) => getIndex(a.data) - getIndex(b.data))
 
         const transitionName = props.transitionName || 'default-modal-transition';
 
