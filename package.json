@@ -1,11 +1,14 @@
 {
   "name": "@pderas/modality",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "An easy to use, yet flexible modals library for Vue.js",
   "main": "dist/modality.umd.min.js",
   "module": "dist/modality.umd.min.js",
   "scripts": {
-    "bundle": "vue-cli-service build --target lib --name modality ./src/index.js",
+    "lint": "eslint src --ext .js,.vue",
+    "lint:fix": "eslint src --ext .js,.vue --fix",
+    "bundle": "npm run lint && npm run bundle:project",
+    "bundle:project": "vue-cli-service build --target lib --name modality ./src/index.js",
     "watch": "vue-cli-service build --watch --target lib --name modality ./src/index.js"
   },
   "author": "Reed Jones <reed.jones@pderas.com>",
@@ -21,10 +24,13 @@
     "vue": "^2.5.17"
   },
   "devDependencies": {
-    "@vue/cli-service": "^3.9.3",
-    "fibers": "^4.0.2",
-    "sass": "^1.23.2",
-    "sass-loader": "^7.1.0",
+    "@pderas/eslint-config": "^1.1.0",
+    "@vue/babel-preset-app": "^4.1.1",
+    "@vue/cli-plugin-babel": "^4.1.1",
+    "@vue/cli-plugin-eslint": "^4.1.1",
+    "@vue/cli-service": "^4.1.1",
+    "sass": "^1.23.7",
+    "sass-loader": "^8.0.0",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10"
   },
