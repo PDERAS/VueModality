@@ -23,6 +23,15 @@ class Modals {
 
         // Modality internal state
         this._watcherVM = new Vue({
+
+            data: _ => ({
+                /**
+                 * All currently active modals
+                 *
+                 * @var {Object} active
+                 */
+                active: {}
+            }),
             computed: {
                 /**
                  * All active modals
@@ -33,15 +42,6 @@ class Modals {
                     return Object.keys(this.active);
                 },
             },
-
-            data: _ => ({
-                /**
-                 * All currently active modals
-                 *
-                 * @var {Object} active
-                 */
-                active: {}
-            }),
 
             methods: {
 
@@ -153,11 +153,11 @@ class Modals {
     show(_name, _options) {
         const opts = typeof _name === 'string'
             ? { ..._options, modal: _name }
-            : _name
+            : _name;
 
         if (!this.available.includes(opts.modal)) {
             console.error(`[Modality]: Failed to show. ${opts.modal} is not a registered modal.`);
-            return console.error('Available:', Object.keys(this._available))
+            return console.error('Available:', Object.keys(this._available));
         }
 
         // Disabled background scrolling when modal is open
@@ -169,7 +169,7 @@ class Modals {
             deferredPromises = {
                 ...deferredPromises,
                 [opts.modal]: { resolve, reject }
-            }
+            };
         });
 
         this._watcherVM.add(opts);
@@ -185,7 +185,7 @@ class Modals {
     hide(_name) {
         if (!Object.keys(this._available).includes(_name)) {
             console.error(`[Modality]: Failed to hide. ${_name} is not a registered modal.`);
-            return console.error('Available:', Object.keys(this._available))
+            return console.error('Available:', Object.keys(this._available));
         }
 
         this._watcherVM.remove(_name);
@@ -205,7 +205,7 @@ class Modals {
         }
 
         // resolve promise
-        modalPromise.resolve()
+        modalPromise.resolve();
     }
 
     /**
@@ -216,7 +216,7 @@ class Modals {
      * @return {Boolean}
      */
     has(_name) {
-        return this._watcherVM.has(name)
+        return this._watcherVM.has(name);
     }
 }
 
