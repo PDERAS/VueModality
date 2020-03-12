@@ -182,7 +182,7 @@ class Modals {
      *
      * @param {String} _name
      */
-    hide(_name) {
+    hide(_name, args = null) {
         if (!Object.keys(this._available).includes(_name)) {
             console.error(`[Modality]: Failed to hide. ${_name} is not a registered modal.`);
             return console.error('Available:', Object.keys(this._available));
@@ -205,7 +205,7 @@ class Modals {
         }
 
         // resolve promise
-        modalPromise.resolve();
+        modalPromise.resolve(args);
     }
 
     /**

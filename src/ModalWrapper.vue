@@ -15,7 +15,7 @@ const getModal = (name, component, createElement, { $style, parent }) => {
                     ...modalEvents,
 
                     // 'injected' event, now $emit('close-modal') simply works
-                    'close-modal': _ => parent.$modals.hide(name)
+                    'close-modal': (args = null) => parent.$modals.hide(name, args)
                 }
             }
         );

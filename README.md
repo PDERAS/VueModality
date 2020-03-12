@@ -87,8 +87,11 @@ this.$emit('close-modal')
 
 If you wish to run an action on modal close, the `show` function returns a Promise which is resolved when the Modal closes.
 ```js
-this.$modals.show('MyNeatoModal')
-    .then(_ => console.log("Modal No More!"))
+this.$modals.hide('MyNeatoModal', 'World!');
+
+
+let returnVal = await this.$modals.show('MyNeatoModal')
+console.log(`Hello, ${returnVal}`) // Hello, World!
 ```
 ---
 
