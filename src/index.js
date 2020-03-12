@@ -3,8 +3,6 @@ import { assert } from './utils';
 
 let Vue; // bind on install
 
-let deferredPromises = {};
-
 class Modals {
     constructor(options = {}) {
         // Auto install if it is not done yet and `window` has `Vue`.
@@ -19,7 +17,16 @@ class Modals {
             assert(this instanceof Modals, 'Modality must be called with the new operator.');
         }
 
-        this._available = options.modals || options;
+        const { modals, ...userOptions } = options;
+
+        this.deferredPromises = {};
+
+        this._userOptions = {
+            scrollLock: true,
+            ...userOptions
+        };
+
+        this._available = modals;
 
         // Modality internal state
         this._watcherVM = new Vue({
@@ -160,14 +167,17 @@ class Modals {
             return console.error('Available:', Object.keys(this._available));
         }
 
-        // Disabled background scrolling when modal is open
-        document.body.style.top = `-${window.scrollY}px`;
-        document.body.style.position = 'fixed';
+        if (this._userOptions.scrollLock) {
+            // Disabled background scrolling when modal is open
+            document.body.style.top = `-${window.scrollY}px`;
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+        }
 
         const p = new Promise((resolve, reject) => {
             // defer resolution until Modal closes
-            deferredPromises = {
-                ...deferredPromises,
+            this.deferredPromises = {
+                ...this.deferredPromises,
                 [opts.modal]: { resolve, reject }
             };
         });
@@ -191,16 +201,17 @@ class Modals {
         this._watcherVM.remove(_name);
 
         // grab & remove the modals promise
-        const { [_name]: modalPromise, ...rest } = deferredPromises;
+        const { [_name]: modalPromise, ...rest } = this.deferredPromises;
 
         // reset deferred without modal
-        deferredPromises = rest;
+        this.deferredPromises = rest;
 
         // Enable background scrolling if last model to close
-        if (!rest.length) {
+        if (!rest.length && this._userOptions.scrollLock) {
             const scrollY = document.body.style.top;
             document.body.style.position = '';
             document.body.style.top = '';
+            document.body.style.width = '';
             window.scrollTo(0, parseInt(scrollY || '0') * -1);
         }
 
