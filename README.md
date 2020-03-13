@@ -21,6 +21,9 @@ Next we register a new "Modals" object which declares every available modal in t
 import OtherModal from './modals/OtherModal'
 
 const modals = new Modality.Modals({
+  // Locks the background while a modal is open
+  scrollLock: true,
+
   modals: {
     // modal declaration format:
     // Modal-Identifier: component
