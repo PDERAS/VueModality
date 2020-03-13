@@ -7,9 +7,9 @@
   "scripts": {
     "lint": "eslint src --ext .js,.vue",
     "lint:fix": "eslint src --ext .js,.vue --fix",
-    "bundle": "npm run lint && npm run bundle:project",
-    "bundle:project": "vue-cli-service build --target lib --name modality ./src/index.js",
-    "watch": "vue-cli-service build --watch --target lib --name modality ./src/index.js"
+    "watch": "vue-cli-service build --watch --target lib --name modality ./src/index.js",
+    "bundle": "vue-cli-service build --target lib --name modality ./src/index.js",
+    "build": "npm run lint && npm run bundle:project"
   },
   "author": "Reed Jones <reed.jones@pderas.com>",
   "license": "MIT",
