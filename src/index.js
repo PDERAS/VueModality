@@ -216,7 +216,7 @@ class Modals {
         }
 
         // resolve promise
-        modalPromise.resolve(args);
+        modalPromise?.resolve(args);
     }
 
     /**
